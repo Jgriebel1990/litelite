@@ -16,5 +16,7 @@ function toggleRed(e){
 }
 
 function clearGrid(e){
-    console.log('clearing the grid');
+    boxes.forEach((box, index) => {
+        box.classList.remove('red');
+    });
 }
