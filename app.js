@@ -31,18 +31,34 @@ function changeGrid(e){
     const grid = makeGrid(gridSizeValue);
     //set the main to the grid
     main.innerHTML = ''; // this clears the main area
-    main.appendChild(grid);
+    grid.forEach((row) => {
+        main.appendChild(row);
+    });
 
 }
 
 
 function makeGrid(size){
-    const element = document.createElement('h1');
-    element.textContent = 'GRID!!!!!!!!!';
-    return element;
-     //make the grid
+    const rows = [];
+    for(let i = 0; i < size; i += 1){
+        //make the grid
         //make a div with class of row
+        const row = document.createElement('div');
+        row.classList.add('row');
         //make a div with class col-md-12 inside of row
+        const col = document.createElement('div');
+        col.classList.add('col-md-12');
+        row.appendChild(col);
         //make 6 divs with class of box inside of col-md-12
+        for(let i = 0; i < size; i += 1){
+            const box = document.createElement('div');
+            box.classList.add('box');
+            box.addEventListener('click', toggleRed); 
+            col.appendChild(box);
+        }
+        rows.push(row);
         //copy and pasted 6 times
+    }
+
+    return rows;
 }
