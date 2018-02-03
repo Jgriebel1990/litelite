@@ -2,24 +2,32 @@
 const resetBtn = document.querySelector('#reset');
 const gridSizeForm = document.querySelector('#grid-size');
 const main = document.querySelector('main');
+const colorPicker = document.querySelector('#pick');
 
 //eventlisteners
 resetBtn.addEventListener('click', clearGrid);
 gridSizeForm.addEventListener('submit', changeGrid);
 
+
+
 //initialized or started
 changeGrid();
 //functions
 
-function toggleRed(e){
+function changeBoxColor(e){
     const element = e.target;
-    element.classList.toggle('red');
+    if(element.style.backgroundColor){ //element = whatever was clicked (where the event originated)
+        element.style.backgroundColor = '';
+    } else{
+        element.style.backgroundColor = colorPicker.value;
+    }
+    
 }
 
 function clearGrid(e){
     const boxes = document.querySelectorAll('.box');
     boxes.forEach((box, index) => {
-        box.classList.remove('red');
+        box.style.backgroundColor = '';
     });
 }
 
@@ -53,7 +61,7 @@ function makeGrid(size){
         for(let i = 0; i < size; i += 1){
             const box = document.createElement('div');
             box.classList.add('box');
-            box.addEventListener('click', toggleRed); 
+            box.addEventListener('click', changeBoxColor); 
             col.appendChild(box);
         }
         rows.push(row);
